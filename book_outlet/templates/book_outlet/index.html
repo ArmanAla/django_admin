@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    All Books
+{% endblock %}
+
+{% block content %}
+    <ul>
+        {% for book in books %}
+            {% if book.author is not None %}
+                {% comment %} <a href="{% url "book_detail" book.id %}"><li>{{ book.title }} written by {{book.author}} --- {{ book.id }}</li></a> {% endcomment %}
+                <a href="{% url "book_detail" book.slug %}"><li>{{ book.title }} written by {{book.author}} --- {{ book.id }}</li></a>    
+            {% else %}
+            <a href="{% url "book_detail" book.slug %}"><li>{{ book.title }}</li></a>    
+            {% endif %}
+        {% endfor %}
+
+        <hr>
+        <p>Total number of books : {{ total_number_of_books }}</p>
+        <p>Average rating : {{ average_rating.rating__avg }}</p>
+    </ul>
+{% endblock %}
